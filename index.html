@@ -4,10 +4,50 @@
     <title>Andrew Egorcev</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:700|Roboto+Condensed:300,700|Source+Sans+Pro:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" type="text/css" href="styles/index.css">
   </head>
   <body>
-    <h1>weather app</h1>
+    <div class="weather-container">
+      <div class="main-info-container">
+        <div class="canvas-container">
+          <canvas id="icon1" width="145" height="119"></canvas>
+        </div>
+        <div class="main-info">
+          <div class="temperature-container">
+            <div class="temperature"> </div>
+            <div class="toggle-button-container"><span class="active">℃</span>
+              <div class="toggle-button">
+                <div class="toggler"></div>
+              </div><span>℉</span>
+            </div>
+          </div>
+          <div class="location-container">
+            <div class="weather-conditions"> </div>
+            <div class="location"> </div>
+          </div>
+          <div class="date-container"></div>
+        </div>
+      </div>
+      <div class="additional-info-container">
+        <div class="wind-speed">
+          <svg class="icon-container">
+            <use class="icon" xlink:href="img/sprite.css.svg#images--wind-speed"></use>
+          </svg><span> </span>
+        </div>
+        <div class="humidity">
+          <svg class="icon-container">
+            <use class="icon" xlink:href="img/sprite.css.svg#images--humidity"></use>
+          </svg><span> </span>
+        </div>
+        <div class="cloud-cover">
+          <svg class="icon-container">
+            <use class="icon" xlink:href="img/sprite.css.svg#images--uv"></use>
+          </svg><span> </span>
+        </div>
+      </div>
+    </div>
+    <script src="js/index.js" defer=""></script>
   </body>
 </html>
