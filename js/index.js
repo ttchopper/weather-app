@@ -8232,7 +8232,7 @@ var index =
 	                });
 	            }
 	            Promise.all([url, getWeather1(googleGeocodingURL)]).then(function (result) {
-	                console.log(result);
+	
 	                var temperature = document.querySelector('.temperature');
 	                var location = document.querySelector('.location');
 	                var dateContainer = document.querySelector('.date-container');
