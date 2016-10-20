@@ -8180,12 +8180,18 @@ var index =
 
 	"use strict";
 	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.getWeather = undefined;
+	
 	var _skycons = __webpack_require__(299);
 	
 	var _skycons2 = _interopRequireDefault(_skycons);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	var getWeather = exports.getWeather = void 0;
 	(function () {
 	    var Skycons = (0, _skycons2.default)(window);
 	    var skycons = new Skycons({ "color": "#778287" });
@@ -8198,42 +8204,55 @@ var index =
 	        var latitude = _position$coords.latitude;
 	        var longitude = _position$coords.longitude;
 	
-	        var darkSkyURL = "http://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/" + forecastKey + "/" + latitude + "," + longitude + "?units=ca";
+	        var darkSkyURL = "https://api.darksky.net/forecast/" + forecastKey + "/" + latitude + "," + longitude + "?units=ca&callback=index.getWeather";
 	        var googleGeocodingURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + "," + longitude + "&key=" + googleGeocodingKey;
+	        var s = document.createElement('script');
+	        s.src = darkSkyURL;
+	        document.body.appendChild(s);
+	        exports.getWeather = getWeather = function getWeather(url) {
+	            function getWeather1(url) {
+	                return new Promise(function (resolve, reject) {
+	                    var xhr = new XMLHttpRequest();
+	                    // xhr.withCredentials = true;
 	
-	        function getWeather(url) {
-	            return new Promise(function (resolve, reject) {
-	                var xhr = new XMLHttpRequest();
-	                xhr.open('GET', url, true);
-	                xhr.send();
-	                xhr.onload = function () {
-	                    resolve(JSON.parse(xhr.responseText));
-	                };
+	                    xhr.open('GET', url, true);
+	                    // xhr.setRequestHeader("Origin", null);
+	                    xhr.send(null);
+	
+	                    // xhr.onreadystatechange = function() {
+	                    //     if (this.readyState === 4) {
+	                    //         resolve(JSON.parse(xhr.responseText));
+	                    //     }
+	                    // };
+	                    xhr.onload = function () {
+	                        // if (this.readyState === 4) {
+	                        resolve(JSON.parse(xhr.responseText));
+	                        // }
+	                    };
+	                });
+	            }
+	            Promise.all([url, getWeather1(googleGeocodingURL)]).then(function (result) {
+	                console.log(result);
+	                var temperature = document.querySelector('.temperature');
+	                var location = document.querySelector('.location');
+	                var dateContainer = document.querySelector('.date-container');
+	                var date = new Date();
+	                var condition = document.querySelector('.weather-conditions');
+	                var windSpeed = document.querySelector('.wind-speed span');
+	                var humidity = document.querySelector('.humidity span');
+	                var cloudCover = document.querySelector('.cloud-cover span');
+	                condition.innerHTML = result[0].currently.summary;
+	                windSpeed.innerHTML = Math.round(result[0].currently.windSpeed) + ' KPH';
+	                humidity.innerHTML = result[0].currently.humidity * 100 + ' %';
+	                cloudCover.innerHTML = result[0].currently.cloudCover * 100 + ' %';
+	                dateContainer.innerHTML = date.toString().slice(4, 7).toUpperCase() + '<br>' + date.toString().slice(8, 10);
+	                temperature.innerHTML = Math.round(result[0].currently.temperature) + "℃";
+	                location.innerHTML = result[1].results[0].address_components[2].short_name + ', ' + result[1].results[0].address_components[5].long_name;
+	                skycons.add("icon1", result[0].currently.icon);
+	                skycons.play();
 	            });
-	        }
-	
-	        Promise.all([getWeather(darkSkyURL), getWeather(googleGeocodingURL)]).then(function (result) {
-	            console.log(result);
-	            var temperature = document.querySelector('.temperature');
-	            var location = document.querySelector('.location');
-	            var dateContainer = document.querySelector('.date-container');
-	            var date = new Date();
-	            var condition = document.querySelector('.weather-conditions');
-	            var windSpeed = document.querySelector('.wind-speed span');
-	            var humidity = document.querySelector('.humidity span');
-	            var cloudCover = document.querySelector('.cloud-cover span');
-	            condition.innerHTML = result[0].currently.summary;
-	            windSpeed.innerHTML = Math.round(result[0].currently.windSpeed) + ' KPH';
-	            humidity.innerHTML = Math.round(result[0].currently.humidity * 100) + ' %';
-	            cloudCover.innerHTML = Math.round(result[0].currently.cloudCover * 100) + ' %';
-	            dateContainer.innerHTML = date.toString().slice(4, 7).toUpperCase() + '<br>' + date.toString().slice(8, 10);
-	            temperature.innerHTML = Math.round(result[0].currently.temperature) + "℃";
-	            location.innerHTML = result[1].results[0].address_components[2].short_name + ', ' + result[1].results[0].address_components[5].long_name;
-	            skycons.add("icon1", result[0].currently.icon);
-	            skycons.play();
-	        });
+	        };
 	    });
-	
 	    var toggler = document.querySelector('.toggler');
 	    toggler.onclick = function (e) {
 	        this.classList.toggle('f');
