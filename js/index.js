@@ -8191,7 +8191,7 @@ var index =
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var getWeather = exports.getWeather = void 0;
+	var getWeather = void 0;
 	(function () {
 	    var Skycons = (0, _skycons2.default)(window);
 	    var skycons = new Skycons({ "color": "#778287" });
@@ -8206,33 +8206,28 @@ var index =
 	
 	        var darkSkyURL = "https://api.darksky.net/forecast/" + forecastKey + "/" + latitude + "," + longitude + "?units=ca&callback=index.getWeather";
 	        var googleGeocodingURL = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + "," + longitude + "&key=" + googleGeocodingKey;
+	
+	        // Create script
 	        var s = document.createElement('script');
 	        s.src = darkSkyURL;
 	        document.body.appendChild(s);
+	
+	        // Cb function for script      
 	        exports.getWeather = getWeather = function getWeather(url) {
-	            function getWeather1(url) {
+	            function getGeocode(url) {
 	                return new Promise(function (resolve, reject) {
 	                    var xhr = new XMLHttpRequest();
-	                    // xhr.withCredentials = true;
+	                    xhr.open('GET', url);
+	                    xhr.send();
 	
-	                    xhr.open('GET', url, true);
-	                    // xhr.setRequestHeader("Origin", null);
-	                    xhr.send(null);
-	
-	                    // xhr.onreadystatechange = function() {
-	                    //     if (this.readyState === 4) {
-	                    //         resolve(JSON.parse(xhr.responseText));
-	                    //     }
-	                    // };
 	                    xhr.onload = function () {
-	                        // if (this.readyState === 4) {
 	                        resolve(JSON.parse(xhr.responseText));
-	                        // }
 	                    };
 	                });
 	            }
-	            Promise.all([url, getWeather1(googleGeocodingURL)]).then(function (result) {
 	
+	            // Wait till all data are retrieved
+	            Promise.all([url, getGeocode(googleGeocodingURL)]).then(function (result) {
 	                var temperature = document.querySelector('.temperature');
 	                var location = document.querySelector('.location');
 	                var dateContainer = document.querySelector('.date-container');
@@ -8253,6 +8248,7 @@ var index =
 	            });
 	        };
 	    });
+	
 	    var toggler = document.querySelector('.toggler');
 	    toggler.onclick = function (e) {
 	        this.classList.toggle('f');
@@ -8270,6 +8266,8 @@ var index =
 	        }
 	    };
 	})();
+	
+	exports.getWeather = getWeather;
 
 /***/ },
 /* 299 */
