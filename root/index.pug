@@ -1,0 +1,53 @@
+doctype html
+html(lang='eng')
+    head
+        title Andrew Egorcev
+        meta(charset='utf-8')
+        meta(
+            name='viewport'
+            content='width=device-width, initial-scale=1.0'
+        )
+        //- link(href='https://fonts.googleapis.com/css?family=Lato:300,400,700,900', rel='stylesheet')
+        link(href='https://fonts.googleapis.com/css?family=Open+Sans:700|Roboto+Condensed:300,700|Source+Sans+Pro:300,400,600', rel='stylesheet')
+        link(rel='stylesheet', type='text/css', href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css')
+        link(rel='stylesheet', type='text/css', href='styles/index.css')
+    body
+        .weather-container
+            .main-info-container
+                .canvas-container
+                    canvas#icon1(width='145', height='119')
+                .main-info
+                    .temperature-container
+                        .temperature 
+                            //- | 79 
+                            //- span.unit ℃
+                        .toggle-button-container
+                            span.active ℃
+                            .toggle-button
+                                .toggler
+                            span ℉
+
+
+                    .location-container
+                        .weather-conditions 
+                        .location 
+                    .date-container
+            .additional-info-container
+                .wind-speed
+                    svg.icon-container
+                        use(class='icon' xlink:href='img/sprite.css.svg#images--wind-speed')
+                    span 
+                .humidity
+                    svg.icon-container
+                        use(class='icon' xlink:href='img/sprite.css.svg#images--humidity')
+                    span 
+                .cloud-cover
+                    svg.icon-container
+                        use(class='icon' xlink:href='img/sprite.css.svg#images--uv')
+                    span 
+
+                
+        script(src='js/index.js', defer='')
+   
+    
+    

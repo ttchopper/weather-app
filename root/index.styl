@@ -1,0 +1,156 @@
+$icons = #525a5d
+$sansPro = 'Source Sans Pro', sans-serif
+$proxima = 'Roboto Condensed', sans-serif
+$openSans = 'Open Sans', sans-serif
+
+
+*
+    box-sizing border-box
+html
+    height 100%
+body
+    background-color #4e5860
+    font bold 16px/1.2 $proxima
+    padding-top 79px
+    height 100%
+.weather-container
+    width 320px
+    height 424px
+    margin 0 auto
+    background-color #f1f8f9
+    border-radius 7px 7px 10px 10px
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.07), 0 21px 20.2px 0.8px rgba(0, 0, 0, 0.15)
+    display flex
+    flex-direction column
+
+.canvas-container
+    padding 69px 28.39% 25px
+
+.main-info-container
+    margin-bottom 18px   
+
+.main-info
+    display flex
+    padding-left 5.65%
+    align-items center
+    position relative
+    
+.temperature-container
+    margin-right 17px
+
+.temperature
+    color #8d9396
+    font-size 24px
+    font-weight 400
+    text-align center
+    margin-bottom 5px
+        
+.weather-conditions
+    font-family $sansPro
+    font-size 24px
+    font-weight 300
+    color #bac2c6
+
+.location
+    color #a2a9ad
+    font-family $sansPro
+    font-size 14px
+    font-weight 600
+
+
+.icon-container
+    fill #525a5d
+    margin-right 10px
+    
+.icon-container:nth-of-type(1)
+    width 29px
+    height 21px
+    fill #525a5d
+
+.icon-container:nth-of-type(2)
+    width 16px
+    height 21px
+    fill #525a5d
+
+.icon-container:nth-of-type(1)
+    width 21px
+    height 21px
+    fill #525a5d
+    
+.date-container
+    position absolute
+    height 100%
+    right 0
+    top 0
+    width: 45px
+    background-color #54bae6
+    color #fff
+    font-family $openSans
+    font-size 14px
+    font-weight 700
+    text-align center
+    display flex
+    align-items center
+    justify-content center
+        
+.additional-info-container
+    display flex
+    align-items center
+    background-color #2e3335
+    flex 1
+    border-radius 0 0 7px 7px
+    color #fff
+    font-size 14px
+    padding 0 45px
+
+    div + div
+        margin-left 15px
+
+    div
+
+        *
+            vertical-align middle
+
+    div:before
+        content ''
+        display inline-block
+        height 100%
+        vertical-align middle
+    
+.cont
+    display inline-block
+
+.toggle-button
+    display inline-block
+    background-color #E1E1E1
+    width 50px
+    height 20px
+    border-radius 15px
+    position relative
+    margin 0 5px 0 2px
+
+.toggler
+    width 20px
+    height 20px
+    position absolute
+    background-color #fff
+    border-radius 50%
+    transition all .6s
+    left 1px
+    cursor pointer
+
+.f
+    left 50px - 21px
+    transition all .6s
+    
+
+.toggle-button-container
+    color #778287
+    font-size 13px
+    font-weight 300
+    *
+        vertical-align middle
+
+
+.active
+    color #54bae6

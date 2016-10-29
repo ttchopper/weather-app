@@ -1,5 +1,5 @@
-import skyconsFunc from 'skycons/skycons';
 
+import skyconsFunc from 'skycons/skycons';
 let getWeather;
 (function() {
     const Skycons= skyconsFunc(window);
